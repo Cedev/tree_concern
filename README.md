@@ -6,9 +6,17 @@ It provides multiple ways of querying ancestors and descendants.
 
 ## Usage
 
+Add `tree_concern` to your application's `Gemfile`:
+
+```
+gem "tree_concern", github: "Cedev/tree_concern"
+```
+
+And run `bundle`
+
 ### Models
 
-Add `include Tree` to a rails model.
+Add `include TreeConcern::Tree` to a rails model.
 
 #### Example usage
 
@@ -16,7 +24,7 @@ This simple model is a `Tree` where each node in the tree has a `:name`. It was 
 
 ```
 class Node < ActiveRecord::Base
-  include Tree
+  include TreeConcern::Tree
   
   def to_s
     self.name + '.' + self.id.to_s
@@ -26,7 +34,7 @@ end
 
 ### Migrations
 
-Add `include TreeMigration` to a db migration, and `add_tree :table_name` to add the `Tree`-specific columns to a table.
+Add `include TreeConcern::Migration` to a db migration, and `add_tree :table_name` to add the `Tree`-specific columns to a table.
 This will add a "parent_id" column to the table, along with an appropriate foreign key.
 
 The included `add_tree` will make a monomorphic relationship. Polymorphism of tree nodes is not supported.
@@ -35,7 +43,7 @@ The included `add_tree` will make a monomorphic relationship. Polymorphism of tr
 
 ```
 class CreateNodes < ActiveRecord::Migration
-  include TreeMigration
+  include TreeConcern::Migration
   
   def change
     create_table :nodes do |t|
