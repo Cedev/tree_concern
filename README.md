@@ -1,4 +1,4 @@
-# tree-concern
+# tree_concern
 
 A tree concern for rails models.
 The `Tree` concern adds `:parent` and `:children` relationships and validates that these remain a tree.
