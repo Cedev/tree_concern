@@ -167,3 +167,31 @@ Is the child of another node (has a parent, isn't a root).
 
 #### `:parent?`
 Is the parent of another node (has any children). Same as `children.any?`
+
+## What about `each` and `Enumerable`?
+
+The `Tree` concern delibrately doesn't provide an `each`, operations like `include?` and `in?`, or `include Enumerable`. Your models might be enumerable in different ways than trees are. Here are a few meaningful ways a `Tree` can be enumerable.
+
+If a node is especially meaningful as tree that contains all of its `subtrees`. If `Tree` had an `each`, this is what it would be
+
+```
+    def each &block
+      self.subtrees &block
+    def
+```
+
+If a node is meaninful as a container that contains its `children`, which happen to be the same type forming a tree
+
+```
+    def each
+      self.children.each
+    def
+```
+
+If a node is meaningful as a reachable `path` (like a prefix tree of all words in a language)
+
+```
+    def each &block
+      self.path &block
+    def
+```
