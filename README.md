@@ -91,7 +91,7 @@ Forms should submit new parents for tree nodes by submitting the `:id` of the pa
 
 ## Querying
 
-The `Tree` concern adds multiple ways of querying ancestors and descendants
+The `Tree` concern adds multiple ways of querying ancestors and descendants. `TreeConcern` query can add these to any class with a `:parent` and `:children`.
 
 #### `:parent`
 The parent of the node.
@@ -100,19 +100,70 @@ The parent of the node.
 Direct children of the node. These are the other instances that have this node as their `:parent`.
 
 #### `:ancestors`
-Ancestors of a node, closest ancestor first. The ancestors are the node's parent, it's parent's parent, etc.
+Ancestors of a node, closest ancestor first. The ancestors are the node's parent, it's parent's parent, etc. If `a.ancestor_of?(b)` then `a` will come after `b` in the results.
+
+#### `:supertrees`
+The node and all its ancestors, closest ancestor first. Includes the node, the node's parent, it's parent's parent, etc. If `a.ancestor_of?(b)` then `a` will come after `b` in the results.
 
 #### `:path`
-Ancestors of a node, root first.
+Supertrees of a node, root first. This is the path from the root to the node, including the node.
 
-#### `:each`
-The node and all of its descendants, depth first. Includes the node, the node's children, it's chidrens' children, etc.
+#### `:parent_path`
+Path to the node's parent, root first. This is the path from the root to the node's parent, or empty if the node is root.
 
-#### `:descendants`
-All of a node's descendants, depth first. The descendants are the node's children, it's chidrens' children, etc.
+#### `:root`
+The root of the tree that this node is a subtree of. Same as `supertrees.last`.
+
+#### `:subtrees`
+The node and all of its descendants. Includes the node, the node's children, it's chidrens' children, etc. If `a.descendant_of(b)` then `a` will come after `b` in the results.
+
+#### `:depth_first`
+The node and all of its descendants, depth first. 
 
 #### `:breadth_first`
 The node and all of its descendants, breadth first.
 
-#### `:decendants_breadth_first`
-All of a node's descendants, breadth first.
+#### `:post_order`
+The node and all of its descendants, descendants first. If `a.descendant_of(b)` then `a` will come **before** `b` in the results.
+
+#### `:descendants`
+All of a node's descendants, depth first. The descendants are the node's children, it's childrens' children, etc. If `a.descendant_of(b)` then `a` will come after `b` in the results.
+
+#### `:descendants_depth_first`
+Descendants of a node, depth first. 
+
+#### `:descendants_breadth_first`
+Descendants of a node, breadth first.
+
+#### `:descendants_post_order`
+Descendants of a node, descendants first. If `a.descendant_of(b)` then `a` will come **before** `b` in the results.
+
+#### `:ancestor_of?(other)`
+`>` for trees. `false` if they're the same. `false` if they can't be compared because neither is a subtree of the other. Same as `in?(other.ancestors)`.
+
+#### `:descendant_of?(other)`
+`<` for trees. `false` if they're the same. `false` if they can't be compared because neither is a subtree of the other. Same as `ancestors.include?(other)`.
+
+#### `:supertree_of?(other)`
+`≥` for trees. `true` if they're the same. `false` if they can't be compared because neither is a subtree of the other. Same as `in?(other.supertrees)`.
+
+#### `:subtree_of?(other)`
+`≤` for trees. `true` if they're the same. `false` if they can't be compared because neither is a subtree of the other. Same as `supertrees.include?(other)`.
+
+#### `:child_of?(other)`
+Same as `parent == other`.
+
+#### `:parent_of?(other)`
+Same as `== other.parent`.
+
+#### `:root_of?(other)`
+Same as `== other.root`.
+
+#### `:root?`
+Is the root of the tree (doesn't have a parent, isn't a child).
+
+#### `:child?`
+Is the child of another node (has a parent, isn't a root).
+
+#### `:parent?`
+Is the parent of another node (has any children). Same as `children.any?`
