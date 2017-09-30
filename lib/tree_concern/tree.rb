@@ -7,6 +7,8 @@ module TreeConcern
       belongs_to :parent, inverse_of: :children, class_name: name
       has_many :children, foreign_key: "parent_id", class_name: name
       
+      scope :roots, -> { where(parent_id: nil) }
+      
       validate :parent_cannot_be_descendant
     end
    
