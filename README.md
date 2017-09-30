@@ -91,7 +91,7 @@ Forms should submit new parents for tree nodes by submitting the `:id` of the pa
 
 ## Querying
 
-The `Tree` concern adds multiple ways of querying ancestors and descendants. `TreeConcern` query can add these to any class with a `:parent` and `:children`.
+The `Tree` concern adds multiple ways of querying ancestors and descendants. `TreeConcern::Query` can add these to any class with a `:parent` and `:children`.
 
 #### `:parent`
 The parent of the node.
