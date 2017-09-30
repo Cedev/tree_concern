@@ -168,7 +168,7 @@ Is the child of another node (has a parent, isn't a root).
 #### `:parent?`
 Is the parent of another node (has any children). Same as `children.any?`
 
-## What about `each` and `Enumerable`?
+### What about `each` and `Enumerable`?
 
 The `Tree` concern delibrately doesn't provide an `each`, operations like `include?` and `in?`, or `include Enumerable`. Your models might be enumerable in different ways than trees are. Here are a few meaningful ways a `Tree` can be enumerable.
 
