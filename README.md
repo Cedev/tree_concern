@@ -6,6 +6,8 @@ It provides multiple ways of querying ancestors and descendants.
 
 ## Usage
 
+### Models
+
 Add `include Tree` to a rails model.
 
 #### Example usage
@@ -22,7 +24,7 @@ class Node < ActiveRecord::Base
 end
 ```
 
-## Migrations
+### Migrations
 
 Add `include TreeMigration` to a db migration, and `add_tree :table_name` to add the `Tree`-specific columns to a table.
 This will add a "parent_id" column to the table, along with an appropriate foreign key.
@@ -45,7 +47,7 @@ class CreateNodes < ActiveRecord::Migration
 end
 ```
 
-## Controllers
+### Controllers
 
 The `:parent` relationship is represented by a foreign key named `"parent_id"`.
 In order to allow the parent to be changed add `:parent_id` to the permitted parameters (`params.permit`) in your controller.
@@ -66,7 +68,7 @@ class NodesController < ApplicationController
 end
 ```
 
-## Views
+### Views
 
 Forms should submit new parents for tree nodes by submitting the `:id` of the parent as `"parent_id"`
 
