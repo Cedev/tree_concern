@@ -127,7 +127,7 @@ The node and all of its descendants, breadth first.
 The node and all of its descendants, descendants first. If `a.descendant_of(b)` then `a` will come **before** `b` in the results.
 
 #### `:descendants`
-All of a node's descendants, depth first. The descendants are the node's children, it's childrens' children, etc. If `a.descendant_of(b)` then `a` will come after `b` in the results.
+All of a node's descendants. The descendants are the node's children, it's childrens' children, etc. If `a.descendant_of(b)` then `a` will come after `b` in the results.
 
 #### `:descendants_depth_first`
 Descendants of a node, depth first. 
